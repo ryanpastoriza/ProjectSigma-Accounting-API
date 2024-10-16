@@ -38,8 +38,6 @@ class VoucherController extends Controller
 		$voucher->details()->createMany($request->details);
 
 		return response()->json(new VoucherResource($voucher), 201);
-		// return response()->json(['voucher' => $request->validated()], 201);
-		// // return $request;
     }
 
     /**
