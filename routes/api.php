@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\v1\{
     PostingPeriodController,
 	VoucherController,
 	BookController,
+	StakeholderController,
 	AccountGroupController,
 };
 
@@ -24,10 +25,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    Route::get('/user', function (Request $request) {
-		return Auth::user();
-	});
+Route::middleware('auth:api')->get('user', function (Request $request) {
+    // Route::get('/user', function (Request $request) {
+		return Auth()->user();
+	// });
 });
 
 Route::middleware('auth:api')->group(function () {
@@ -35,6 +36,10 @@ Route::middleware('auth:api')->group(function () {
 	Route::resource('account-group', AccountGroupController::class);
 	Route::resource('books', BookController::class);
 	Route::resource('posting-period', PostingPeriodController::class);
+	Route::resource('stakeholder', StakeholderController::class);
+	Route::resource('voucher', VoucherController::class);
+
+	Route::get('voucher/number/{prefix}', [VoucherController::class, 'voucherNo']);
 });
 
 
