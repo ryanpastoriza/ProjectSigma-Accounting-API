@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\Collections\AccountGroupCollection;
 use App\Http\Resources\AccountGroupResource;
 use App\Models\AccountGroup;
 use Illuminate\Http\JsonResponse;
@@ -17,7 +18,7 @@ class AccountGroupController extends Controller
     public function index()
     {
         $accountGroups = AccountGroup::all();
-		return response()->json(AccountGroupResource::collection($accountGroups), 200);
+		return new AccountGroupCollection($accountGroups);
     }
 
     /**
