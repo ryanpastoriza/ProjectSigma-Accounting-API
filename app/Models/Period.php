@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
 
 class Period extends Model
 {
@@ -24,5 +25,14 @@ class Period extends Model
 	public function postingPeriod() : BelongsTo
 	{
 		return $this->belongsTo(PostingPeriod::class);
+	}
+
+	public function scopeCurrent($query)
+	{
+		$currentDate = Carbon::now();
+		
+		return $query->where('start_date', '<=', $currentDate)
+					 ->where('end_date', '>=', $currentDate)
+					 ->where('status', 'open');
 	}
 }

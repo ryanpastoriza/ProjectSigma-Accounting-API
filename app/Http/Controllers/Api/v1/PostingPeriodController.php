@@ -66,4 +66,9 @@ class PostingPeriodController extends Controller
     {
         //
     }
+
+	public function updatePeriodStatus(PostingPeriod $postingPeriod)
+	{
+		
+	}
 }

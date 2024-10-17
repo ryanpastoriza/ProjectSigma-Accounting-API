@@ -11,6 +11,7 @@ class AccountType extends Model
     use HasFactory;
 
 	protected $table = 'account_types';
+	public $timestamps = false;
 
 	protected $fillable = [
 		'account_type',
@@ -18,8 +19,6 @@ class AccountType extends Model
 		'balance_type',
 		'notation',	
     ];
-
-	public $timestamps = false;
 
 	public function accounts(): HasMany
     {

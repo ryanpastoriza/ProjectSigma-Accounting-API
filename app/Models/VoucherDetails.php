@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class VoucherDetails extends Model
 {
@@ -26,13 +25,13 @@ class VoucherDetails extends Model
         return $this->BelongsTo(Voucher::class);
     }
 
-	public function account(): HasOne
+	public function account(): BelongsTo
     {
-        return $this->hasOne(Account::class);
+        return $this->belongsTo(Account::class);
     }
 
-	public function stakeholder(): HasOne
+	public function stakeholder(): BelongsTo
     {
-        return $this->hasOne(Stakeholder::class);
+        return $this->belongsTo(Stakeholder::class);
     }
 }

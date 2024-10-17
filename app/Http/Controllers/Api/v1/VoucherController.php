@@ -11,6 +11,7 @@ use App\Models\VoucherDetails;
 use App\Http\Resources\VoucherResource;
 use App\Http\Requests\StoreRequest\VoucherStoreRequest;
 use App\Http\Requests\UpdateRequest\VoucherUpdateRequest;
+// use App\Models\VoucherDetails;
 
 class VoucherController extends Controller
 {
@@ -41,12 +42,12 @@ class VoucherController extends Controller
 		return response()->json(new VoucherResource($voucher), 201);
     }
 
-    /**
+    /**voucher
      * Display the specified resource.
      */
     public function show(Voucher $voucher)
     {
-		return response()->json(new VoucherResource($voucher), 201);
+		return response()->json(new VoucherResource($voucher), 201);	
     }
 
     /**
