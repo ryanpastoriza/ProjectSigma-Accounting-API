@@ -18,6 +18,8 @@ class Book extends Model
 		'account_group_id',
 	];
 
+	public $timestamps = false;
+
 	public function accountGroup(): BelongsTo
     {
         return $this->belongsTo(AccountGroup::class);

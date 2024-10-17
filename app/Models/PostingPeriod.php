@@ -11,7 +11,7 @@ class PostingPeriod extends Model
     use HasFactory;
 
 	protected $table = 'posting_periods';
-
+	public $timestamps = false;
 	protected $fillable = [
 		'period_start',
 		'period_end',

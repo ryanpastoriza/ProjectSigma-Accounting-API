@@ -19,6 +19,8 @@ class Period extends Model
 		'status'
 	];
 
+	public $timestamps = false;
+
 	public function postingPeriod() : BelongsTo
 	{
 		return $this->belongsTo(PostingPeriod::class);

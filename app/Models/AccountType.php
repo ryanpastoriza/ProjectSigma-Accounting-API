@@ -19,6 +19,8 @@ class AccountType extends Model
 		'notation',	
     ];
 
+	public $timestamps = false;
+
 	public function accounts(): HasMany
     {
         return $this->hasMany(Account::class);

@@ -17,9 +17,12 @@ class AccountsController extends Controller
      */
     public function index()
     {
-		$accounts = Account::whereHas('accountType', function($query) {
-						$query->where('account_category', 'expenses');
-					})->get();
+
+		$accounts = Account::all();
+
+		// $accounts = Account::whereHas('accountType', function($query) {
+		// 				$query->where('account_category', 'expenses');
+		// 			})->get();
 
         return response()->json(AccountsResource::collection($accounts));
     }

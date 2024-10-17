@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use App\Models\Voucher;
+use App\Models\VoucherDetails;
 use App\Http\Resources\VoucherResource;
 use App\Http\Requests\StoreRequest\VoucherStoreRequest;
 use App\Http\Requests\UpdateRequest\VoucherUpdateRequest;
@@ -43,9 +44,9 @@ class VoucherController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Voucher $voucher)
     {
-        //
+		return response()->json(new VoucherResource($voucher), 201);
     }
 
     /**
@@ -53,7 +54,7 @@ class VoucherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
@@ -62,16 +63,22 @@ class VoucherController extends Controller
     public function update(VoucherUpdateRequest $request, Voucher $voucher)
     {
         $voucher->update($request->validated());
-		$details = $request->details;
 
-		// foreach ($details as $detail) {
-		// 	VoucherDetail::upsert()
+		// Get current voucher details
+		$existingIds = $voucher->details()->pluck('id')->toArray();
 
+		$voucherDetails = $request->details;
+		$incomingIds = [];
 
-        // }
-		// $voucher->details()->update($request->details);
+		foreach ($voucherDetails as $voucherDetail) 
+		{
+			$detail = $voucher->details()->updateOrCreate($voucherDetail);
+			$incomingIds[] = $detail->id;
+		}
+		// Remove voucher details that are no longer present
+		$toDelete = array_diff($existingIds, $incomingIds);
+		$voucher->details()->whereIn('id', $toDelete)->delete();
 		return response()->json(new VoucherResource($voucher), 201);
-		// return response()->json(['details'=> $request->details], 201);
     }
 
     /**
